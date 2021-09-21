@@ -92,7 +92,7 @@ protobuf {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.polidea.rxandroidble2:rxandroidble:1.12.1'
+    # implementation 'com.polidea.rxandroidble2:rxandroidble:1.12.1'
     implementation 'com.google.protobuf:protobuf-javalite:3.11.0'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -101,4 +101,13 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.5.1"
     testImplementation "io.mockk:mockk:1.11.0"
     testImplementation "com.google.truth:truth:1.0"
+}
+
+configurations.all {
+    exclude group: 'com.polidea.rxandroidble2', module: 'rxandroidble'
+}
+
+dependencies {
+    implementation files('libs/rxandroidble-debug.aar')
+    // or depend on the module.
 }
