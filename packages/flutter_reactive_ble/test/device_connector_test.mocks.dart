@@ -151,6 +151,10 @@ class MockReactiveBlePlatform extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#requestMtuSize, [deviceId, mtu]),
           returnValue: Future<int>.value(0)) as _i4.Future<int>);
   @override
+  _i4.Future<int> requestPhySize(String? deviceId, int? phy) =>
+      (super.noSuchMethod(Invocation.method(#requestPhySize, [deviceId, phy]),
+          returnValue: Future<int>.value(0)) as _i4.Future<int>);
+  @override
   _i4.Future<_i2.ConnectionPriorityInfo> requestConnectionPriority(
           String? deviceId, _i2.ConnectionPriority? priority) =>
       (super.noSuchMethod(

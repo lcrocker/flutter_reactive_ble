@@ -172,6 +172,10 @@ abstract class ReactiveBlePlatform extends PlatformInterface {
     throw UnimplementedError('requestMtuSize has not been implemented.');
   }
 
+  Future<int> requestPhySize(String deviceId, int? phy) {
+    throw UnimplementedError('requestPhySize has not been implemented.');
+  }
+
   /// Requests for a connection parameter update on the connected device.
   ///
   /// This operation is specific to the Android ecosystem and should not be

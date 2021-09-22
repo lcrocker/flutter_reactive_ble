@@ -204,6 +204,11 @@ class FlutterReactiveBle {
     return _connectedDeviceOperator.requestMtu(deviceId, mtu);
   }
 
+  Future<int> requestPhy({required String deviceId, required int phy}) async {
+    await initialize();
+    return _connectedDeviceOperator.requestPhy(deviceId, phy);
+  }
+
   /// Requests for a connection parameter update on the connected device.
   ///
   /// Always completes with an error on iOS, as there is no way (and no need) to perform this operation on iOS.

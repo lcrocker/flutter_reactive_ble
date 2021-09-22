@@ -195,6 +195,17 @@ class ReactiveBleMobilePlatform extends ReactiveBlePlatform {
           .then((data) => _protobufConverter.mtuSizeFrom(data!));
 
   @override
+  Future<int> requestPhySize(String deviceId, int? phy) async =>
+      _bleMethodChannel
+          .invokeMethod<List<int>>(
+            "negotiatePhySize",
+            _argsToProtobufConverter
+                .createNegotiatePhyRequest(deviceId, phy!)
+                .writeToBuffer(),
+          )
+          .then((data) => _protobufConverter.phySizeFrom(data!));
+
+  @override
   Future<ConnectionPriorityInfo> requestConnectionPriority(
           String deviceId, ConnectionPriority priority) =>
       _bleMethodChannel

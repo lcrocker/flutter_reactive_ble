@@ -1,5 +1,6 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:meta/meta.dart';
+import 'package:reactive_ble_mobile/reactive_ble_mobile.dart';
 import 'package:reactive_ble_platform_interface/reactive_ble_platform_interface.dart';
 
 abstract class ConnectedDeviceOperation {
@@ -23,6 +24,8 @@ abstract class ConnectedDeviceOperation {
   );
 
   Future<int> requestMtu(String deviceId, int mtu);
+
+  Future<int> requestPhy(String deviceId, int phy);
 
   Future<List<DiscoveredService>> discoverServices(String deviceId);
 
@@ -99,6 +102,10 @@ class ConnectedDeviceOperationImpl implements ConnectedDeviceOperation {
   @override
   Future<int> requestMtu(String deviceId, int mtu) async =>
       _blePlatform.requestMtuSize(deviceId, mtu);
+
+  @override
+  Future<int> requestPhy(String deviceId, int phy) async =>
+      (_blePlatform as ReactiveBleMobilePlatform).requestPhySize(deviceId, phy);
 
   @override
   Future<List<DiscoveredService>> discoverServices(String deviceId) =>
