@@ -43,6 +43,10 @@ sealed class MtuNegotiateResult
 data class MtuNegotiateSuccesful(val deviceId: String, val size: Int) : MtuNegotiateResult()
 data class MtuNegotiateFailed(val deviceId: String, val errorMessage: String) : MtuNegotiateResult()
 
+sealed class PhyNegotiateResult
+data class PhyNegotiateSuccesful(val deviceId: String, val size: Int) : PhyNegotiateResult()
+data class PhyNegotiateFailed(val deviceId: String, val errorMessage: String) : PhyNegotiateResult()
+
 sealed class CharOperationResult
 data class CharOperationSuccessful(val deviceId: String, val value: List<Byte>) : CharOperationResult()
 data class CharOperationFailed(val deviceId: String, val errorMessage: String) : CharOperationResult()

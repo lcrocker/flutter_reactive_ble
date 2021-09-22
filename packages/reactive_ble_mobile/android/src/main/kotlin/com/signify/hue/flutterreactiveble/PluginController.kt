@@ -35,6 +35,7 @@ class PluginController {
             "readNotifications" to this::readNotifications,
             "stopNotifications" to this::stopNotifications,
             "negotiateMtuSize" to this::negotiateMtuSize,
+            "negotiatePhySize" to this::negotiatePhySize,
             "requestConnectionPriority" to this::requestConnectionPriority,
             "discoverServices" to this::discoverServices
     )
@@ -228,6 +229,20 @@ class PluginController {
                     result.success(protoConverter.convertNegotiateMtuInfo(mtuResult).toByteArray())
                 }, { throwable ->
                     result.success(protoConverter.convertNegotiateMtuInfo(com.signify.hue.flutterreactiveble.ble.MtuNegotiateFailed(request.deviceId,
+                            throwable.message ?: "")).toByteArray())
+                }
+                )
+                .discard()
+    }
+
+    private fun negotiatePhySize(call: MethodCall, result: Result) {
+        val request = pb.NegotiatePhyRequest.parseFrom(call.arguments as ByteArray)
+        bleClient.negotiatePhySize(request.deviceId, request.phySize)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ phyResult ->
+                    result.success(protoConverter.convertNegotiatePhyInfo(phyResult).toByteArray())
+                }, { throwable ->
+                    result.success(protoConverter.convertNegotiatePhyInfo(com.signify.hue.flutterreactiveble.ble.PhyNegotiateFailed(request.deviceId,
                             throwable.message ?: "")).toByteArray())
                 }
                 )

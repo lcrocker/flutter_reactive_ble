@@ -24,6 +24,9 @@ abstract class ProtobufConverter {
 
   int mtuSizeFrom(List<int> data) =>
       pb.NegotiateMtuInfo.fromBuffer(data).mtuSize;
+  
+  int phySizeFrom(List<int> data) =>
+      pb.NegotiatePhyInfo.fromBuffer(data).phySize;
 
   List<DiscoveredService> discoveredServicesFrom(List<int> data);
 }
@@ -162,6 +165,10 @@ class ProtobufConverterImpl implements ProtobufConverter {
   @override
   int mtuSizeFrom(List<int> data) =>
       pb.NegotiateMtuInfo.fromBuffer(data).mtuSize;
+
+  @override
+  int phySizeFrom(List<int> data) =>
+      pb.NegotiatePhyInfo.fromBuffer(data).phySize;
 
   QualifiedCharacteristic qualifiedCharacteristicFrom(
           pb.CharacteristicAddress message) =>

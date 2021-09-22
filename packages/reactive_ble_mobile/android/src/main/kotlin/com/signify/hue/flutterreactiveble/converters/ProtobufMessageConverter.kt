@@ -7,6 +7,9 @@ import com.signify.hue.flutterreactiveble.ble.ConnectionUpdateSuccess
 import com.signify.hue.flutterreactiveble.ble.MtuNegotiateFailed
 import com.signify.hue.flutterreactiveble.ble.MtuNegotiateResult
 import com.signify.hue.flutterreactiveble.ble.MtuNegotiateSuccesful
+import com.signify.hue.flutterreactiveble.ble.PhyNegotiateFailed
+import com.signify.hue.flutterreactiveble.ble.PhyNegotiateResult
+import com.signify.hue.flutterreactiveble.ble.PhyNegotiateSuccesful
 import com.signify.hue.flutterreactiveble.ble.RequestConnectionPriorityFailed
 import com.signify.hue.flutterreactiveble.ble.RequestConnectionPriorityResult
 import com.signify.hue.flutterreactiveble.ble.RequestConnectionPrioritySuccess
@@ -16,6 +19,7 @@ import com.signify.hue.flutterreactiveble.model.ClearGattCacheErrorType
 import com.signify.hue.flutterreactiveble.model.ConnectionErrorType
 import com.signify.hue.flutterreactiveble.model.ConnectionState
 import com.signify.hue.flutterreactiveble.model.NegotiateMtuErrorType
+import com.signify.hue.flutterreactiveble.model.NegotiatePhyErrorType
 import com.signify.hue.flutterreactiveble.model.ScanErrorType
 import java.util.UUID
 import com.signify.hue.flutterreactiveble.ProtobufModel as pb
@@ -135,6 +139,26 @@ class ProtobufMessageConverter {
                             .build()
 
                     pb.NegotiateMtuInfo.newBuilder()
+                            .setDeviceId(result.deviceId)
+                            .setFailure(failure)
+                            .build()
+                }
+            }
+
+    fun convertNegotiatePhyInfo(result: PhyNegotiateResult): pb.NegotiatePhyInfo =
+            when (result) {
+                is PhyNegotiateSuccesful -> pb.NegotiatePhyInfo.newBuilder()
+                        .setDeviceId(result.deviceId)
+                        .setPhySize(result.size)
+                        .build()
+                is PhyNegotiateFailed -> {
+
+                    val failure = pb.GenericFailure.newBuilder()
+                            .setCode(NegotiatePhyErrorType.UNKNOWN.code)
+                            .setMessage(result.errorMessage)
+                            .build()
+
+                    pb.NegotiatePhyInfo.newBuilder()
                             .setDeviceId(result.deviceId)
                             .setFailure(failure)
                             .build()

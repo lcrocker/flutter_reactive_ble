@@ -35,6 +35,7 @@ interface BleClient {
         value: ByteArray
     ): Single<CharOperationResult>
     fun negotiateMtuSize(deviceId: String, size: Int): Single<MtuNegotiateResult>
+    fun negotiatePhySize(deviceId: String, size: Int): Single<PhyNegotiateResult>
     fun observeBleStatus(): Observable<BleStatus>
     fun requestConnectionPriority(deviceId: String, priority: ConnectionPriority):
             Single<RequestConnectionPriorityResult>

@@ -33,6 +33,11 @@ abstract class ArgsToProtobufConverter {
     int mtu,
   );
 
+  pb.NegotiatePhyRequest createNegotiatePhyRequest(
+    String deviceId,
+    int phy,
+  );
+
   pb.ChangeConnectionPriorityRequest createChangeConnectionPrioRequest(
     String deviceId,
     ConnectionPriority priority,
@@ -152,6 +157,18 @@ class ArgsToProtobufConverterImpl implements ArgsToProtobufConverter {
     final args = pb.NegotiateMtuRequest()
       ..deviceId = deviceId
       ..mtuSize = mtu;
+
+    return args;
+  }
+
+  @override
+  pb.NegotiatePhyRequest createNegotiatePhyRequest(
+    String deviceId,
+    int phy,
+  ) {
+    final args = pb.NegotiatePhyRequest()
+      ..deviceId = deviceId
+      ..phySize = phy;
 
     return args;
   }

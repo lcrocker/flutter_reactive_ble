@@ -81,6 +81,17 @@ message NegotiateMtuInfo {
     GenericFailure failure = 3;
 }
 
+message NegotiatePhyRequest {
+    string deviceId = 1;
+    int32 phySize = 2;
+}
+
+message NegotiatePhyInfo {
+    string deviceId = 1;
+    int32 phySize = 2;
+    GenericFailure failure = 3;
+}
+
 message BleStatusInfo {
     int32 status = 1;
 }

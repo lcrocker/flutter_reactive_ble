@@ -228,6 +228,22 @@ open class ReactiveBleClient(private val context: Context) : BleClient {
             }
         }.first(MtuNegotiateFailed(deviceId, "negotiate mtu timed out"))
 
+    override fun negotiatePhySize(deviceId: String, size: Int): Single<PhyNegotiateResult> =
+        getConnection(deviceId).flatMapSingle { connectionResult ->
+            when (connectionResult) {
+                is EstablishedConnection -> connectionResult.rxConnection.requestPhy(size)
+                    .map { value -> PhyNegotiateSuccesful(deviceId, value) }
+
+                is EstablishConnectionFailure ->
+                    Single.just(
+                        PhyNegotiateFailed(
+                            deviceId,
+                            "failed to connect ${connectionResult.errorMessage}"
+                        )
+                    )
+            }
+        }.first(PhyNegotiateFailed(deviceId, "negotiate phy timed out"))
+
     override fun observeBleStatus(): Observable<BleStatus> = rxBleClient.observeStateChanges()
         .startWith(rxBleClient.state)
         .map { it.toBleState() }

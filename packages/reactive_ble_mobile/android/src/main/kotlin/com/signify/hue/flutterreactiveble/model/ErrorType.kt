@@ -17,6 +17,10 @@ enum class NegotiateMtuErrorType(val code: Int) {
     UNKNOWN(0)
 }
 
+enum class NegotiatePhyErrorType(val code: Int) {
+    UNKNOWN(0)
+}
+
 enum class ScanErrorType(val code: Int) {
     UNKNOWN(0)
 }
