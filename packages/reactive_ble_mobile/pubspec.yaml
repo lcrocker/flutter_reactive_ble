@@ -11,7 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   protobuf: ^2.0.0
-  reactive_ble_platform_interface: ^4.0.0
+
+  reactive_ble_platform_interface:
+    version: 4.0.0
+    git:
+      url: https://github.com/lcrocker/flutter_reactive_ble.git
+      path: packages/reactive_ble_platform_interface
 
 dev_dependencies:
   build_runner: ^2.1.1

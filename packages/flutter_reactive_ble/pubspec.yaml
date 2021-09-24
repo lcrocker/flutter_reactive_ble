@@ -24,13 +24,15 @@ dependencies:
   pedantic: ^1.11.1
 
   reactive_ble_mobile:
+    version: 4.0.0
     git:
-      url: git@github.com:lcrocker/flutter_reactive_ble.git
+      url: https://github.com/lcrocker/flutter_reactive_ble.git
       path: packages/reactive_ble_mobile
-    
+
   reactive_ble_platform_interface:
+    version: 4.0.0
     git:
-      url: git@github.com:lcrocker/flutter_reactive_ble.git
+      url: https://github.com/lcrocker/flutter_reactive_ble.git
       path: packages/reactive_ble_platform_interface
 
 dev_dependencies:
